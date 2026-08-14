@@ -17,6 +17,11 @@ describe('YouTube', () => {
     render(<YouTube />);
     expect(screen.getByRole('status')).toHaveTextContent('YouTube embed not available');
   });
+
+  it('can hide an unavailable embed', () => {
+    const { container } = render(<YouTube fallback="hidden" />);
+    expect(container).toBeEmptyDOMElement();
+  });
 });
 
 describe('GitHubRepoCard', () => {

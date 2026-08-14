@@ -4,3 +4,4 @@ export { default as YouTube } from '../components/YouTube';
 export type { GitHubRepoCardProps } from '../components/GitHubRepoCard';
 export type { NpmPackageCardProps } from '../components/NpmPackageCard';
 export type { YouTubeProps } from '../components/YouTube';
+export type { EmbedFallbackMode } from '../components/shared/EmbedFallback';

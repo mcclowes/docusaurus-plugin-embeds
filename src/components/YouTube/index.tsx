@@ -1,10 +1,13 @@
 import type { CSSProperties } from 'react';
+import EmbedFallback, { type EmbedFallbackMode } from '../shared/EmbedFallback';
+import ResponsiveIframe from '../shared/ResponsiveIframe';
 
 export interface YouTubeProps {
   id?: string;
   title?: string;
   aspectRatio?: CSSProperties['aspectRatio'];
   className?: string;
+  fallback?: EmbedFallbackMode;
 }
 
 export default function YouTube({
@@ -12,40 +15,34 @@ export default function YouTube({
   title = 'YouTube video player',
   aspectRatio = '16 / 9',
   className,
+  fallback = 'link',
 }: YouTubeProps) {
   if (!id) {
     return (
-      <div
+      <EmbedFallback
         className={className}
-        role="status"
+        mode={fallback}
         style={{
-          alignItems: 'center',
           aspectRatio,
           backgroundColor: '#1a1a1a',
-          borderRadius: '12px',
           color: '#888',
-          display: 'flex',
-          justifyContent: 'center',
           maxWidth: '100%',
-          padding: '2rem',
           width: '100%',
         }}
       >
         YouTube embed not available
-      </div>
+      </EmbedFallback>
     );
   }
 
   return (
-    <iframe
+    <ResponsiveIframe
       className={className}
-      style={{ aspectRatio, border: 0, maxWidth: '100%', width: '100%' }}
+      aspectRatio={aspectRatio}
       src={`https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}`}
       title={title}
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
       allowFullScreen
-      loading="lazy"
-      referrerPolicy="strict-origin-when-cross-origin"
     />
   );
 }
