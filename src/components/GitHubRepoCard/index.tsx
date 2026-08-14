@@ -1,5 +1,6 @@
 import { useEffect, useState, type CSSProperties } from 'react';
 import formatNumber from '../../utils/formatNumber';
+import EmbedFallback, { type EmbedFallbackMode } from '../shared/EmbedFallback';
 import styles from './styles.module.css';
 
 interface GitHubRepository {
@@ -18,9 +19,15 @@ export interface GitHubRepoCardProps {
   repo: string;
   className?: string;
   style?: CSSProperties;
+  fallback?: EmbedFallbackMode;
 }
 
-export default function GitHubRepoCard({ repo, className, style }: GitHubRepoCardProps) {
+export default function GitHubRepoCard({
+  repo,
+  className,
+  style,
+  fallback = 'link',
+}: GitHubRepoCardProps) {
   const [data, setData] = useState<GitHubRepository | null>(null);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(Boolean(repo));
@@ -48,11 +55,20 @@ export default function GitHubRepoCard({ repo, className, style }: GitHubRepoCar
   }, [repo]);
 
   const license = data?.license?.spdx_id;
+  const href = data?.html_url ?? `https://github.com/${repo}`;
+
+  if (error && fallback !== 'link') {
+    return (
+      <EmbedFallback className={className} href={href} mode={fallback} style={style}>
+        GitHub / {repo}
+      </EmbedFallback>
+    );
+  }
 
   return (
     <a
       className={[styles.card, className].filter(Boolean).join(' ')}
-      href={data?.html_url ?? `https://github.com/${repo}`}
+      href={href}
       target="_blank"
       rel="noopener noreferrer"
       style={style}

@@ -1,5 +1,6 @@
 import { useEffect, useState, type CSSProperties } from 'react';
 import formatNumber from '../../utils/formatNumber';
+import EmbedFallback, { type EmbedFallbackMode } from '../shared/EmbedFallback';
 import styles from './styles.module.css';
 
 interface NpmMetadata {
@@ -15,12 +16,14 @@ export interface NpmPackageCardProps {
   package: string;
   className?: string;
   style?: CSSProperties;
+  fallback?: EmbedFallbackMode;
 }
 
 export default function NpmPackageCard({
   package: packageName,
   className,
   style,
+  fallback = 'link',
 }: NpmPackageCardProps) {
   const [data, setData] = useState<NpmMetadata | null>(null);
   const [downloads, setDownloads] = useState<number | null>(null);
@@ -64,11 +67,20 @@ export default function NpmPackageCard({
   const keywords = latest?.keywords ?? data?.keywords ?? [];
   const license = latest?.license ?? data?.license;
   const published = latestVersion && data?.time?.[latestVersion];
+  const href = `https://www.npmjs.com/package/${packageName}`;
+
+  if (error && fallback !== 'link') {
+    return (
+      <EmbedFallback className={className} href={href} mode={fallback} style={style}>
+        npm / {packageName}
+      </EmbedFallback>
+    );
+  }
 
   return (
     <a
       className={[styles.card, className].filter(Boolean).join(' ')}
-      href={`https://www.npmjs.com/package/${packageName}`}
+      href={href}
       target="_blank"
       rel="noopener noreferrer"
       style={style}

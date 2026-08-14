@@ -35,6 +35,12 @@ describe('GitHubRepoCard', () => {
     expect(screen.getByRole('link')).toHaveAttribute('href', 'https://github.com/mcclowes/example');
     expect(screen.getByRole('link')).toHaveAttribute('rel', 'noopener noreferrer');
   });
+
+  it('uses the selected fallback after a request fails', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockRejectedValue(new Error('offline')));
+    const { container } = render(<GitHubRepoCard repo="mcclowes/example" fallback="hidden" />);
+    await vi.waitFor(() => expect(container).toBeEmptyDOMElement());
+  });
 });
 
 describe('NpmPackageCard', () => {
@@ -49,6 +55,14 @@ describe('NpmPackageCard', () => {
       'https://www.npmjs.com/package/example-package',
     );
     expect(screen.getByRole('link')).toHaveTextContent('Fetching package details');
+  });
+
+  it('uses a compact fallback after a request fails', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockRejectedValue(new Error('offline')));
+    render(<NpmPackageCard package="example-package" fallback="compact" />);
+    await vi.waitFor(() =>
+      expect(screen.getByRole('status')).toHaveTextContent('npm / example-package'),
+    );
   });
 });
 
