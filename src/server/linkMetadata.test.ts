@@ -51,9 +51,7 @@ describe('link metadata', () => {
   it('checks redirect targets and parses the final page', async () => {
     const fetchMock = vi
       .fn()
-      .mockResolvedValueOnce(
-        new Response(null, { status: 302, headers: { location: '/final' } }),
-      )
+      .mockResolvedValueOnce(new Response(null, { status: 302, headers: { location: '/final' } }))
       .mockResolvedValueOnce(
         new Response('<title>Final page</title>', {
           headers: { 'content-type': 'text/html' },

@@ -1,7 +1,9 @@
 import type { CSSProperties, IframeHTMLAttributes } from 'react';
 
-export interface ResponsiveIframeProps
-  extends Omit<IframeHTMLAttributes<HTMLIFrameElement>, 'style'> {
+export interface ResponsiveIframeProps extends Omit<
+  IframeHTMLAttributes<HTMLIFrameElement>,
+  'style'
+> {
   aspectRatio?: CSSProperties['aspectRatio'];
   style?: CSSProperties;
 }

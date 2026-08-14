@@ -90,7 +90,9 @@ export function parseLinkMetadata(html: string, requestedUrl: string): LinkMetad
   for (const tag of html.match(/<link\b[^>]*>/gi) ?? []) {
     const attributes = parseAttributes(tag);
     const relationships = attributes.rel?.toLowerCase().split(/\s+/) ?? [];
-    if (relationships.some((relationship) => relationship === 'icon' || relationship === 'shortcut')) {
+    if (
+      relationships.some((relationship) => relationship === 'icon' || relationship === 'shortcut')
+    ) {
       favicon = absoluteUrl(attributes.href, base);
       if (favicon) break;
     }
@@ -99,9 +101,7 @@ export function parseLinkMetadata(html: string, requestedUrl: string): LinkMetad
   const titleTag = html.match(/<title\b[^>]*>([\s\S]*?)<\/title>/i)?.[1];
   const title = values.get('og:title') ?? values.get('twitter:title') ?? titleTag;
   const description =
-    values.get('og:description') ??
-    values.get('twitter:description') ??
-    values.get('description');
+    values.get('og:description') ?? values.get('twitter:description') ?? values.get('description');
 
   return {
     url: base.toString(),
@@ -150,7 +150,8 @@ export async function assertPublicUrl(
   lookup: LookupAddresses = (hostname) => dns.lookup(hostname, { all: true, verbatim: true }),
 ): Promise<URL> {
   const url = new URL(value);
-  if (!['http:', 'https:'].includes(url.protocol)) throw new Error('Only HTTP links can be embedded');
+  if (!['http:', 'https:'].includes(url.protocol))
+    throw new Error('Only HTTP links can be embedded');
   if (url.username || url.password) throw new Error('Link URLs cannot contain credentials');
   if (url.hostname === 'localhost' || url.hostname.endsWith('.localhost')) {
     throw new Error('Private network links cannot be embedded');
@@ -242,10 +243,7 @@ export async function readLinkCache(cacheFile: string): Promise<LinkMetadataCach
   }
 }
 
-export async function writeLinkCache(
-  cacheFile: string,
-  cache: LinkMetadataCache,
-): Promise<void> {
+export async function writeLinkCache(cacheFile: string, cache: LinkMetadataCache): Promise<void> {
   await fs.mkdir(path.dirname(cacheFile), { recursive: true });
   await fs.writeFile(cacheFile, `${JSON.stringify(cache, null, 2)}\n`, 'utf8');
 }

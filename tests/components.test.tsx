@@ -3,6 +3,7 @@ import { describe, expect, it, vi } from 'vitest';
 import GitHubRepoCard from '../src/components/GitHubRepoCard';
 import NpmPackageCard from '../src/components/NpmPackageCard';
 import YouTube from '../src/components/YouTube';
+import RichLinkCard from '../src/components/RichLinkCard';
 
 describe('YouTube', () => {
   it('uses the privacy-enhanced embed host', () => {
@@ -48,5 +49,34 @@ describe('NpmPackageCard', () => {
       'https://www.npmjs.com/package/example-package',
     );
     expect(screen.getByRole('link')).toHaveTextContent('Fetching package details');
+  });
+});
+
+describe('RichLinkCard', () => {
+  it('renders resolved metadata and a safe destination link', () => {
+    const { container } = render(
+      <RichLinkCard
+        url="https://example.com/article"
+        metadata={{
+          url: 'https://example.com/article',
+          title: 'Example article',
+          description: 'A useful summary.',
+          image: 'https://example.com/image.jpg',
+          siteName: 'Example',
+        }}
+      />,
+    );
+    expect(screen.getByRole('link')).toHaveAttribute('href', 'https://example.com/article');
+    expect(screen.getByText('Example article')).toBeInTheDocument();
+    expect(container.querySelector('img')).toHaveAttribute('src', 'https://example.com/image.jpg');
+  });
+
+  it('supports compact and hidden fallbacks without metadata', () => {
+    const { rerender, container } = render(
+      <RichLinkCard url="https://example.com/article" fallback="compact" />,
+    );
+    expect(screen.getByRole('status')).toHaveTextContent('example.com');
+    rerender(<RichLinkCard url="https://example.com/article" fallback="hidden" />);
+    expect(container).toBeEmptyDOMElement();
   });
 });

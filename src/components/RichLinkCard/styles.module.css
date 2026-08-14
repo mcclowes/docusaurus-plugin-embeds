@@ -1,0 +1,89 @@
+.card {
+  align-items: stretch;
+  background: var(--ifm-card-background-color, var(--ifm-background-surface-color, #fff));
+  border: 1px solid var(--ifm-color-emphasis-300, #d0d7de);
+  border-radius: 12px;
+  color: var(--ifm-font-color-base, #1c1e21);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(160px, 32%);
+  margin: 1rem 0;
+  max-width: 760px;
+  overflow: hidden;
+  text-decoration: none;
+  transition:
+    border-color 120ms ease,
+    box-shadow 120ms ease;
+}
+
+.card:hover {
+  border-color: var(--ifm-color-primary, #3578e5);
+  box-shadow: 0 4px 14px rgb(0 0 0 / 10%);
+  color: var(--ifm-font-color-base, #1c1e21);
+  text-decoration: none;
+}
+
+.cardWithoutImage {
+  grid-template-columns: 1fr;
+}
+
+.content {
+  min-width: 0;
+  padding: 1rem;
+}
+
+.source {
+  align-items: center;
+  color: var(--ifm-color-emphasis-700, #57606a);
+  display: flex;
+  font-size: 0.8rem;
+  gap: 0.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.source img {
+  border-radius: 3px;
+}
+
+.title {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.description {
+  color: var(--ifm-color-emphasis-700, #57606a);
+  display: -webkit-box;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  margin: 0.45rem 0 0;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.hostname {
+  color: var(--ifm-color-emphasis-600, #6e7781);
+  font-size: 0.75rem;
+  margin-top: 0.75rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.image {
+  height: 100%;
+  min-height: 150px;
+  object-fit: cover;
+  width: 100%;
+}
+
+@media (max-width: 600px) {
+  .card {
+    grid-template-columns: 1fr;
+  }
+
+  .image {
+    max-height: 220px;
+    order: -1;
+  }
+}

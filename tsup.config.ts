@@ -10,7 +10,7 @@ export default defineConfig({
   dts: true,
   sourcemap: true,
   clean: true,
-  external: ['react', 'react-dom', '@theme-original/MDXComponents'],
+  external: ['react', 'react-dom', '@docusaurus/useGlobalData', '@theme-original/MDXComponents'],
   loader: { '.module.css': 'local-css' },
   esbuildOptions(options, context) {
     if (context.format === 'cjs') {
