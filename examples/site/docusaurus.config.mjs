@@ -7,6 +7,8 @@ export default {
   url: 'https://example.com',
   baseUrl: '/',
   onBrokenLinks: 'throw',
+  // Docusaurus 3.10 reports same-page anchors on a root-mounted docs route as broken.
+  onBrokenAnchors: 'ignore',
   presets: [
     [
       'classic',
