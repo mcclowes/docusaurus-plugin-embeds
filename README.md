@@ -1,5 +1,7 @@
 # Docusaurus plugin embeds
 
+![Docusaurus plugin embeds banner](assets/readme-banner.png)
+
 Rich MDX embeds for arbitrary links, GitHub repositories, npm packages, and YouTube videos.
 
 The plugin registers its components globally, so MDX files can use them without an import. The cards follow Docusaurus theme variables and work in light and dark modes.
