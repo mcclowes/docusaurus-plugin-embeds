@@ -2,11 +2,12 @@
 
 The best additions turn a plain third-party link into useful context, degrade to a link, and don't make every page carry a large vendor script.
 
+## Built
+
+- Generic link previews with build-time Open Graph metadata, caching, stale fallback, explicit overrides, and compact or hidden fallbacks.
+- A private responsive iframe primitive used by YouTube and ready for other providers.
+
 ## Build next
-
-### Generic link preview
-
-A compact Open Graph card would cover articles, product pages, and sites without a dedicated component. It should resolve metadata at build time through a cache, since browser fetches will hit CORS restrictions. This also gives static HTML, predictable builds, and no reader-side requests.
 
 ### GitHub issue and pull request
 
@@ -40,4 +41,4 @@ This is the simplest extension of the video component. A shared responsive ifram
 
 ## Shared work before the list grows
 
-Before adding more API-backed cards, add a build-time metadata cache with stale-while-revalidate behavior. Before adding more iframe providers, extract a private responsive iframe component that owns aspect ratio, lazy loading, titles, referrer policy, and fallback UI. Both are real abstractions with clear interfaces; a generic card component would be premature until two or three more cards expose the common shape.
+The build-time metadata cache and responsive iframe primitive now exist. Reuse them for API-backed cards and iframe providers, but wait for two or three cards to expose a stable common shape before extracting a generic card component.

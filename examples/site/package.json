@@ -1,0 +1,7 @@
+{
+  "name": "docusaurus-plugin-embeds-example",
+  "private": true,
+  "scripts": {
+    "build": "docusaurus build"
+  }
+}

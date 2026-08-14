@@ -1,0 +1,23 @@
+{
+  "https://example.com": {
+    "fetchedAt": 4102444800000,
+    "metadata": {
+      "url": "https://example.com/",
+      "title": "Example domain",
+      "description": "A stable fixture used by the integration example.",
+      "siteName": "Example"
+    }
+  },
+  "https://example.com/manual": {
+    "fetchedAt": 4102444800000,
+    "metadata": {
+      "url": "https://example.com/manual"
+    }
+  },
+  "https://example.invalid": {
+    "fetchedAt": 4102444800000,
+    "metadata": {
+      "url": "https://example.invalid/"
+    }
+  }
+}

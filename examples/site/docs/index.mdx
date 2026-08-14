@@ -1,0 +1,31 @@
+---
+title: Embed examples
+slug: /
+---
+
+# Embed examples
+
+## Rich link with fetched metadata
+
+<RichLinkCard url="https://example.com" />
+
+## Rich link with explicit metadata
+
+<RichLinkCard
+  url="https://example.com/manual"
+  title="Explicit metadata wins"
+  description="Use overrides for private, dynamic, or poorly marked-up pages."
+  siteName="Example"
+/>
+
+## Compact fallback
+
+<RichLinkCard url="https://example.invalid" fallback="compact" />
+
+## Existing embeds
+
+<GitHubRepoCard repo="facebook/docusaurus" />
+
+<NpmPackageCard package="@docusaurus/core" />
+
+<YouTube id="dQw4w9WgXcQ" title="Example YouTube video" />

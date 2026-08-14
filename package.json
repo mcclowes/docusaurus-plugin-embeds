@@ -1,7 +1,7 @@
 {
   "name": "docusaurus-plugin-embeds",
   "version": "0.1.0",
-  "description": "Docusaurus components for rich GitHub, npm, and YouTube embeds",
+  "description": "Docusaurus components for rich link, GitHub, npm, and YouTube embeds",
   "type": "module",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
@@ -26,6 +26,7 @@
   ],
   "scripts": {
     "build": "tsup",
+    "build:example": "npm run build && npm --prefix examples/site run build",
     "clean": "rimraf dist",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
@@ -38,6 +39,7 @@
   "keywords": [
     "docusaurus",
     "embed",
+    "open-graph",
     "github",
     "npm",
     "youtube",
@@ -63,6 +65,7 @@
   },
   "devDependencies": {
     "@docusaurus/core": "^3.10.1",
+    "@docusaurus/preset-classic": "^3.10.2",
     "@docusaurus/types": "^3.10.1",
     "@eslint/js": "^9.39.1",
     "@testing-library/jest-dom": "^6.9.1",
