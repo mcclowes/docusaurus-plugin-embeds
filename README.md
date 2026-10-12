@@ -161,6 +161,8 @@ npm run build:example
 
 Requires Node.js 20 or newer.
 
+CI runs formatting, typecheck, lint, tests, and the example-site build on Node.js 20 and 24 for pull requests and pushes to main.
+
 ## License
 
 MIT
