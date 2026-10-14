@@ -159,7 +159,7 @@ npm run build
 npm run build:example
 ```
 
-Requires Node.js 20 or newer.
+Development uses Vitest 4 and requires Node.js 20.19+, 22.12+, or 24+.
 
 CI runs formatting, typecheck, lint, tests, and the example-site build on Node.js 20 and 24 for pull requests and pushes to main.
 
